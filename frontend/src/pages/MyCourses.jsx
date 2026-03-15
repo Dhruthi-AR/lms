@@ -20,10 +20,10 @@ const MyCourses = () => {
     try {
       let backendCourses = [];
       if (user.role === 'STUDENT') {
-        const res = await axios.get('http://localhost:5000/api/my-courses', { headers: { Authorization: `Bearer ${token}` } });
+        const res = await axios.get('https://lms-3xy9.onrender.com/api/my-courses', { headers: { Authorization: `Bearer ${token}` } });
         backendCourses = res.data;
       } else {
-        const res = await axios.get('http://localhost:5000/api/courses', { headers: { Authorization: `Bearer ${token}` } });
+        const res = await axios.get('https://lms-3xy9.onrender.com/api/courses', { headers: { Authorization: `Bearer ${token}` } });
         backendCourses = res.data.filter(c => c.instructorId === user.id);
       }
 
@@ -49,7 +49,7 @@ const MyCourses = () => {
         localStorage.setItem(`savedCourses_${user.id}`, JSON.stringify(saved));
         setCourses(courses.map(c => c.id === course.id ? { ...c, progress: 100 } : c));
       } else {
-        await axios.put('http://localhost:5000/api/enroll/progress', { courseId: course.id, progress: 100 }, {
+        await axios.put('https://lms-3xy9.onrender.com/api/enroll/progress', { courseId: course.id, progress: 100 }, {
           headers: { Authorization: `Bearer ${token}` }
         });
         setCourses(courses.map(c => c.id === course.id ? { ...c, progress: 100 } : c));

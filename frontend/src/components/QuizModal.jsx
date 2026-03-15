@@ -19,7 +19,7 @@ const QuizModal = ({ isOpen, onClose, lessonNotes, lessonId }) => {
     setError('');
     try {
       const res = await axios.post(
-        'http://localhost:5000/api/ai/generate-quiz',
+        'https://lms-3xy9.onrender.com/api/ai/generate-quiz',
         { lessonNotes, count: 3 },
         { headers: { Authorization: `Bearer ${token}` } }
       );

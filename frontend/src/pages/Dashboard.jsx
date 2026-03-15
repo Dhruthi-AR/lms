@@ -23,13 +23,13 @@ const Dashboard = () => {
     try {
       if (user.role === 'STUDENT') {
         const [courseRes, recRes] = await Promise.all([
-          axios.get('http://localhost:5000/api/my-courses', { headers: { Authorization: `Bearer ${token}` } }),
-          axios.get('http://localhost:5000/api/ai/recommendations', { headers: { Authorization: `Bearer ${token}` } })
+          axios.get('https://lms-3xy9.onrender.com/api/my-courses', { headers: { Authorization: `Bearer ${token}` } }),
+          axios.get('https://lms-3xy9.onrender.com/api/ai/recommendations', { headers: { Authorization: `Bearer ${token}` } })
         ]);
         setCourses(courseRes.data);
         setRecommendation(recRes.data.recommendation);
       } else if (user.role === 'INSTRUCTOR') {
-        const res = await axios.get('http://localhost:5000/api/courses', { headers: { Authorization: `Bearer ${token}` } });
+        const res = await axios.get('https://lms-3xy9.onrender.com/api/courses', { headers: { Authorization: `Bearer ${token}` } });
         // Filter by instructor
         setCourses(res.data.filter(c => c.instructorId === user.id));
       }

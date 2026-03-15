@@ -22,7 +22,7 @@ const CourseView = () => {
         // Try backend first
         let courseData = null;
         try {
-          const res = await axios.get(`http://localhost:5000/api/courses/${id}`, {
+          const res = await axios.get(`https://lms-3xy9.onrender.com/api/courses/${id}`, {
             headers: { Authorization: `Bearer ${token}` }
           });
           courseData = res.data;
@@ -61,7 +61,7 @@ const CourseView = () => {
     if (!activeLesson?.notes) return;
     setIsSummarizing(true);
     try {
-      const res = await axios.post('http://localhost:5000/api/ai/summarize', { notes: activeLesson.notes }, {
+      const res = await axios.post('https://lms-3xy9.onrender.com/api/ai/summarize', { notes: activeLesson.notes }, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setSummary(res.data.summary);

@@ -16,7 +16,7 @@ const Quizzes = () => {
       try {
         let backendCourses = [];
         if (user?.role === 'STUDENT') {
-          const res = await axios.get('http://localhost:5000/api/my-courses', { headers: { Authorization: `Bearer ${token}` } });
+          const res = await axios.get('https://lms-3xy9.onrender.com/api/my-courses', { headers: { Authorization: `Bearer ${token}` } });
           backendCourses = res.data;
         }
 

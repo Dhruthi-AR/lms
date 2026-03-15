@@ -12,8 +12,10 @@ const quizRoutes = require('./routes/quizRoutes');
 const aiRoutes = require('./routes/aiRoutes');
 
 const app = express();
-
-app.use(cors());
+app.use(cors({
+  origin: ["https://lms-bay-omega.vercel.app", "http://localhost:5173", "http://localhost:3000"],
+  credentials: true
+}));
 app.use(express.json());
 
 app.use('/api/auth', authRoutes);

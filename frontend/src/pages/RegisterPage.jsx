@@ -16,7 +16,7 @@ const RegisterPage = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/register', { name, email, password, role });
+      const res = await axios.post('https://lms-3xy9.onrender.com/api/auth/register', { name, email, password, role });
       setAuth(res.data, res.data.token);
       navigate('/dashboard');
     } catch (err) {

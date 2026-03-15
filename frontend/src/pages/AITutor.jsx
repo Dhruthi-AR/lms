@@ -31,7 +31,7 @@ const AITutor = () => {
 
     try {
       const res = await axios.post(
-        'http://localhost:5000/api/ai/chat',
+        'https://lms-3xy9.onrender.com/api/ai/chat',
         { message: userMessage },
         { headers: { Authorization: `Bearer ${token}` } }
       );

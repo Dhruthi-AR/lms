@@ -9,7 +9,7 @@ const LandingPage = () => {
   useEffect(() => {
     const fetchCourses = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/api/courses');
+        const res = await axios.get('https://lms-3xy9.onrender.com/api/courses');
         setPopularCourses(res.data.slice(0, 3)); // Display top 3 courses
       } catch (err) {
         console.error('Failed to load courses', err);
