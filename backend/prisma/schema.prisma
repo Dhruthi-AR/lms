@@ -1,0 +1,86 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  STUDENT
+  INSTRUCTOR
+  ADMIN
+}
+
+model User {
+  id             Int             @id @default(autoincrement())
+  name           String
+  email          String          @unique
+  password       String
+  role           Role            @default(STUDENT)
+  createdAt      DateTime        @default(now())
+  
+  // Relations
+  coursesTaught  Course[]        @relation("InstructorCourses")
+  enrollments    Enrollment[]
+  quizScores     StudentQuiz[]
+}
+
+model Course {
+  id             Int             @id @default(autoincrement())
+  title          String
+  description    String          @db.Text
+  instructorId   Int
+  createdAt      DateTime        @default(now())
+
+  instructor     User            @relation("InstructorCourses", fields: [instructorId], references: [id])
+  lessons        Lesson[]
+  enrollments    Enrollment[]
+}
+
+model Lesson {
+  id             Int             @id @default(autoincrement())
+  courseId       Int
+  title          String
+  videoUrl       String?
+  notes          String?         @db.Text
+  
+  course         Course          @relation(fields: [courseId], references: [id])
+  quizzes        Quiz[]
+}
+
+model Enrollment {
+  id             Int             @id @default(autoincrement())
+  studentId      Int
+  courseId       Int
+  progress       Int             @default(0)
+
+  student        User            @relation(fields: [studentId], references: [id])
+  course         Course          @relation(fields: [courseId], references: [id])
+
+  @@unique([studentId, courseId])
+}
+
+model Quiz {
+  id             Int             @id @default(autoincrement())
+  lessonId       Int
+  question       String          @db.Text
+  options        Json            // Store options as array of strings
+  correctAnswer  String
+  
+  lesson         Lesson          @relation(fields: [lessonId], references: [id])
+  studentScores  StudentQuiz[]
+}
+
+model StudentQuiz {
+  id             Int             @id @default(autoincrement())
+  studentId      Int
+  quizId         Int
+  score          Float
+
+  student        User            @relation(fields: [studentId], references: [id])
+  quiz           Quiz            @relation(fields: [quizId], references: [id])
+
+  @@unique([studentId, quizId])
+}
