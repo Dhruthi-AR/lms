@@ -20,7 +20,7 @@ app.use(
   cors({
     // If you set CORS_ORIGINS on the hosting platform, use it.
     // Otherwise (common for deployments), reflect the request Origin.
-    origin: corsOrigins?.length ? corsOrigins : true,
+    origin: process.env.CORS_ORIGINS,   
     credentials: true,
   })
 );
