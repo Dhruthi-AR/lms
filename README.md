@@ -36,7 +36,7 @@ A full-stack Learning Management System built with Node.js backend and React fro
 
 5. Start the server:
    ```bash
-   npm start
+   npm run start
    ```
 
 ### Frontend
@@ -61,3 +61,17 @@ A full-stack Learning Management System built with Node.js backend and React fro
 - Backend: Node.js, Express, Prisma, MySQL
 - Frontend: React, Vite, Tailwind CSS
 - AI: OpenAI/Hugging Face integration
+
+## Deployment Notes
+
+### Backend (Render / similar)
+
+Make sure Render sets these environment variables in `backend`:
+
+- `DATABASE_URL`
+- `JWT_SECRET`
+- AI credentials: either `OPENAI_API_KEY` OR `HF_ACCESS_TOKEN` (+ `HF_MODEL`)
+- (optional) `OPENAI_BASE_URL`, `AI_MODEL`
+- (optional but recommended) `CORS_ORIGINS` (comma-separated allowed frontend origins)
+
+Start Command: `npm run start`
